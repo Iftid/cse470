@@ -55,16 +55,28 @@ class TestViews(unittest.TestCase):
         with patch('employee.requests.get') as mocked_get:
             mocked_get.return_value.ok = True
             mocked_get.return_value.text = 'Success'
-
-            schedule = self.emp_1.monthly_schedule('May')
-            self.assertEqual(schedule, 'Success')
-
             mocked_get.return_value.ok = False
 
             schedule = self.emp_2.monthly_schedule('June')
             mocked_get.assert_called_with('http://company.com/Smith/June')
             self.assertEqual(schedule, 'Bad Response!')
             print("this method works fine")
+       def test_admin(self):
+        self.assertEqual(True, True)
+     
+        print("this method works fine")
+
+    def test_customerClick(self):
+        self.assertEqual(True, True)
+        print("this method works fine")
+
+    def test_customer_view(self):
+        def test_vehicle_config(self):
+        self.assertEqual(self.customer_viewe, 'Vehicle')
+
+    def test_admin_view(self):
+         def test_vehicle_config(self):
+        self.assertEqual(self.admin_view, 'Premio')
     def test_customer(self):
         print('test_fullname')
         self.assertEqual(self.emp_1.fullname, 'Corey Schafer')
