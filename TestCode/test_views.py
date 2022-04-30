@@ -61,7 +61,7 @@ class TestViews(unittest.TestCase):
             mocked_get.assert_called_with('http://company.com/Smith/June')
             self.assertEqual(schedule, 'Bad Response!')
             print("this method works fine")
-       def test_admin(self):
+    def test_admin(self):
         self.assertEqual(True, True)
      
         print("this method works fine")
