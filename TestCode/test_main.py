@@ -49,24 +49,6 @@ if __name__ == '__main__':
     unittest.main()
 
 
-###### setUpClass and tearDownClass ######
-
-@classmethod
-def setUpClass(cls):
-    print('setupClass')
-
-@classmethod
-def tearDownClass(cls):
-    print('teardownClass')
-
-
-##### Mocking #####
-def monthly_schedule(self, month):
-    response = requests.get(f'http://company.com/{self.last}/{month}')
-    if response.ok:
-        return response.text
-    else:
-        return 'Bad Response!'
 
 
 
