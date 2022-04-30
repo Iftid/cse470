@@ -1,8 +1,8 @@
 import unittest
 
-class MyTestCase(unittest.TestCase):
+class test_apps(unittest.TestCase):
     def test_vehicle_config(self):
-        self.assertEqual(True, True)
+        self.assertEqual(self.vehicle_model, 'Vehicle')
 
 
 if __name__ == '__main__':
