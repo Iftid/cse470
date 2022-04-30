@@ -102,7 +102,7 @@ class TestViews(unittest.TestCase):
         print('tearDown\n')
         print("this method works fine")
 
-    def test_customer_email(self):
+   def test_customer_email(self):
         
         self.assertEqual(self.emp_1.email, 'Corey.Schafer@email.com')
         self.assertEqual(self.emp_2.email, 'Sue.Smith@email.com')
@@ -114,7 +114,7 @@ class TestViews(unittest.TestCase):
         self.assertEqual(self.emp_2.email, 'Jane.Smith@email.com')
         print("this method works fine")
 
-    def test_mechanic_name(self):
+   def test_mechanic_name(self):
         
         self.assertEqual(self.emp_1.fullname, 'Corey Schafer')
         self.assertEqual(self.emp_2.fullname, 'Sue Smith')
@@ -140,7 +140,7 @@ class TestViews(unittest.TestCase):
             mocked_get.assert_called_with('http://company.com/Schafer/May')
             self.assertEqual(schedule, 'Success')
             print("this method works fine")
-       def setUp(self):
+    def setUp(self):
         print('setUp')
         self.emp_1 = Employee('Corey', 'Schafer', 50000)
         self.emp_2 = Employee('Sue', 'Smith', 60000)
