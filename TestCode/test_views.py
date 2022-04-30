@@ -1,201 +1,143 @@
 import unittest
+import views
+from unittest.mock import patch
 
 
-class MyTestCase(unittest.TestCase):
-    def test_something(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
+
+class TestViews(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        print('setupClass')
+
+    @classmethod
+    def tearDownClass(cls):
+        print('teardownClass')
+
+    def test_home_view(self):
+        print('setUp')
+        self.emp_1 = Employee('Corey', 'Schafer', 50000)
+        self.emp_2 = Employee('Sue', 'Smith', 60000)
         print("this method works fine")
 
-    def test_something1(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
+    def tearDown(self):
+        print('tearDown\n')
         print("this method works fine")
 
-    def test_something2(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
+    def test_customer_email(self):
+        
+        self.assertEqual(self.emp_1.email, 'Corey.Schafer@email.com')
+        self.assertEqual(self.emp_2.email, 'Sue.Smith@email.com')
+
+        self.emp_1.first = 'John'
+        self.emp_2.first = 'Jane'
+
+        self.assertEqual(self.emp_1.email, 'John.Schafer@email.com')
+        self.assertEqual(self.emp_2.email, 'Jane.Smith@email.com')
         print("this method works fine")
 
-    def test_something3(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
+    def test_fullname(self):
+        
+        self.assertEqual(self.emp_1.fullname, 'Corey Schafer')
+        self.assertEqual(self.emp_2.fullname, 'Sue Smith')
+
+        self.emp_1.first = 'John'
+        self.emp_2.first = 'Jane'
+
+        self.assertEqual(self.emp_1.fullname, 'John Schafer')
+        self.assertEqual(self.emp_2.fullname, 'Jane Smith')
         print("this method works fine")
 
-    def test_something4(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
-        print("this method works fine")
-    def test_something5(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
+    def test_apply_raise(self):
+        print('test_apply_raise')
+        self.emp_1.apply_raise()
+        self.emp_2.apply_raise()
         print("this method works fine")
 
-    def test_something6(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
+        self.assertEqual(self.emp_1.pay, 52500)
+        self.assertEqual(self.emp_2.pay, 63000)
+        print("this method works fine")
+    def test_monthly_schedule(self):
+        with patch('employee.requests.get') as mocked_get:
+            mocked_get.return_value.ok = True
+            mocked_get.return_value.text = 'Success'
+
+            schedule = self.emp_1.monthly_schedule('May')
+            mocked_get.assert_called_with('http://company.com/Schafer/May')
+            self.assertEqual(schedule, 'Success')
+
+            mocked_get.return_value.ok = False
+
+            schedule = self.emp_2.monthly_schedule('June')
+            mocked_get.assert_called_with('http://company.com/Smith/June')
+            self.assertEqual(schedule, 'Bad Response!')
+            print("this method works fine")
+    def test_customer(self):
+        print('test_fullname')
+        self.assertEqual(self.emp_1.fullname, 'Corey Schafer')
+        self.assertEqual(self.emp_2.fullname, 'Sue Smith')
+
+        self.emp_1.first = 'iftid'
+        self.emp_2.first = 'ashrafee'
+
+        self.assertEqual(self.cst_1.fullname, 'Iftid')
+        self.assertEqual(self.cst_2.fullname, 'Ashrafee')
         print("this method works fine")
 
-    def test_something7(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
+    def test_apply_raise(self):
+        print('test_apply_raise')
+        self.emp_1.apply_raise()
+        self.emp_2.apply_raise()
         print("this method works fine")
 
-    def test_something8(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
+        self.assertEqual(self.cst_1.pay, 52500)
+        self.assertEqual(self.cst_2.pay, 63000)
+        print("this method works fine")
+   def tearDown(self):
+        print('tearDown\n')
         print("this method works fine")
 
-    def test_something9(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
-        print("this method works fine")
-    def test_something10(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
+    def test_customer_email(self):
+        
+        self.assertEqual(self.emp_1.email, 'Corey.Schafer@email.com')
+        self.assertEqual(self.emp_2.email, 'Sue.Smith@email.com')
+
+        self.emp_1.first = 'John'
+        self.emp_2.first = 'Jane'
+
+        self.assertEqual(self.emp_1.email, 'John.Schafer@email.com')
+        self.assertEqual(self.emp_2.email, 'Jane.Smith@email.com')
         print("this method works fine")
 
-    def test_something11(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
+    def test_mechanic_name(self):
+        
+        self.assertEqual(self.emp_1.fullname, 'Corey Schafer')
+        self.assertEqual(self.emp_2.fullname, 'Sue Smith')
+
+        self.emp_1.first = 'John'
+        self.emp_2.first = 'Jane'
+
+        self.assertEqual(self.emp_1.fullname, 'John Schafer')
+        self.assertEqual(self.emp_2.fullname, 'Jane Smith')
         print("this method works fine")
 
-    def test_something12(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
+    def test_apply_for_job(self):
+        print('test_apply_raise')
+        self.emp_1.apply_raise()
+        self.emp_2.apply_raise()
         print("this method works fine")
 
-    def test_something13(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
+        self.assertEqual(self.emp_1.pay, 52500)
+        self.assertEqual(self.emp_2.pay, 63000)
         print("this method works fine")
+    def test_monthly_schedule(self):
+        with patch('employee.requests.get') as mocked_get:
+            mocked_get.return_value.ok = True
+            mocked_get.return_value.text = 'Success'
 
-    def test_something14(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
-        print("this method works fine")
-    def test_something15(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
-        print("this method works fine")
-
-    def test_something16(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
-        print("this method works fine")
-
-    def test_something17(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
-        print("this method works fine")
-
-    def test_something1745(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
-        print("this method works fine")
-
-    def test_somethingty(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
-        print("this method works fine")
-
-    def test_somethingx(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
-        print("this method works fine")
-
-    def test_something2x(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
-        print("this method works fine")
-
-    def test_something23s(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
-        print("this method works fine")
-
-    def test_something4as(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
-        print("this method works fine")
-
-    def test_something5w(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
-        print("this method works fine")
-
-    def test_somethingj(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
-        print("this method works fine")
-
-    def test_someething2(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
-        print("this method works fine")
-
-    def test_sometdhing23(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
-        print("this method works fine")
-
-    def test_s2omething4(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
-        print("this method works fine")
-
-    def test_syyomething5(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
-        print("this method works fine")
-    def test_somxething(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
-        print("this method works fine")
-
-    def test_something2z(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
-        print("this method works fine")
-
-    def test_sometrhing23(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
-        print("this method works fine")
-
-    def test_somethooing4(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
-        print("this method works fine")
-
-    def test_somethoooing5(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
-        print("this method works fine")
-    def test_somethinge34(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
-        print("this method works fine")
-
-    def test_somethinerererereer2(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
-        print("this method works fine")
-
-    def test_something2ererererer3(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
-        print("this method works fine")
-
-    def test_somethingerererer4(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
-        print("this method works fine")
-
-    def test_something5erer(self):
-        self.assertEqual(True, True)
-        self.assertEqual(True, True)
-        print("this method works fine")
+            schedule = self.emp_1.monthly_schedule('May')
+            mocked_get.assert_called_with('http://company.com/Schafer/May')
+            self.assertEqual(schedule, 'Success')
 
 if __name__ == '__main__':
     unittest.main()
